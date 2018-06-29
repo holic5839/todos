@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+   <head>
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <title>to do app</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+   <!-- <script src="main.js"></script> -->
+
+   </head>
+    <body>
+       <input type="text" placeholder="input to do">
+       <button class='add-btn'>add</button>
+       <button class='resetAll'>reset</button>
+       <ul>
+       </ul>
+       <script>
+           var inputText = document.querySelector('input');
+           var list = document.querySelector('ul');
+           var addText = document.querySelector('.add-btn');
+           var reset = document.querySelector('.resetAll');
+           
+           //할일을 입력 받아 추가하는 함수
+           function getNewText(text){
+               if (text === '') return; //문자열이 아무것도 없으면 등록 하지 않는다.
+               var result = todos.map(function(todo){
+                 return todo.id;
+                 }); 
+                var maxId = Math.max.apply(null, result) + 1; //todo에 id요소들 중에 최대값
+               list.innerHTML += '<li id=' + maxId + '><span>' + '<input type="checkbox"' + false + '>' + text + '</span><button>del</button></li>' ;
+               todos.unshift({ id: maxId, content: text, completed: false });
+               inputText.value = ''; //항목 추가 후 input박스 안에 있는 값 초기화
+               console.log(todos);
+           }
+
+           //클릭시 할일 추가
+           addText.addEventListener('click', function(){
+               getNewText(inputText.value);
+           });
+           
+           //enter키 입력시 할일 추가
+           inputText.addEventListener('keyup', function(e){
+               if(e.keyCode !== 13) return; //enter키 입력시만 리스트에 등록되도록.
+               getNewText(inputText.value);
+           });
+           
+           //del버튼을 누르면 등록되어있는 문자열 삭제하기
+           list.addEventListener('click',function(e){
+               if(e.target.nodeName !== 'BUTTON') return;
+               
+               todos = todos.filter(function(todo){
+                   return todo.id !== +e.target.parentNode.id;
+               });
+               this.removeChild(e.target.parentNode); 
+               console.log(todos);
+           });
+           
+           
+           //모든 리스트 한번에 삭제하기
+           reset.addEventListener('click',function(){
+               while(list.hasChildNodes())
+               list.removeChild(list.firstChild);
+               todos = '';
+           });           
+
+           //서버로부터 데이터 취득
+           window.addEventListener('load', function () {
+            todos = [
+                { id: 1, content: 'HTML', completed: true },
+                { id: 2, content: 'CSS', completed: false },
+                { id: 3, content: 'JS', completed: true },
+                { id: 4, content: 'Angular', completed: false }
+            ];
+            var newElem = todos.forEach(function(todo){
+                var checked = todo.completed ? 'checked' : '';
+                return list.innerHTML += '<li id=' + todo.id + '><span>' + '<input type="checkbox"' + checked + '>' + todo.content + '</span><button>del</button></li>' ;
+            }) 
+           });
+       </script>
+   </body>
+</html>
