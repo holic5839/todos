@@ -194,5 +194,3 @@ window.addEventListener('load', function () {
   newRenderHtml();
   itemCount();
  });
-
- // test
