@@ -181,7 +181,7 @@ clearCompleted.addEventListener('click', function(e){
   itemCount();
   console.dir(todos);
 });
-
+// HTMLFieldSetElement
 
 // data load하기
 window.addEventListener('load', function () {
