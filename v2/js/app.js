@@ -12,22 +12,22 @@ function newRenderHtml(){
   list.innerHTML += '<li class="list-group-item">'
   + '<div class="hover-anchor">'
   + '<a class="hover-action text-muted">'
-  + '<span class="glyphicon glyphicon-remove-circle pull-right" data-id="' 
+  + '<span class="glyphicon glyphicon-remove-circle pull-right" data-id="'
   + todo.id + '"></span></a><label class="i-checks" for="' + todo.id + '">'
   + '<input type="checkbox" id="' + todo.id + '"' + checked + '><i></i>'
   + '<span>' + todo.content + '</span>'
   + '</label></div></li>' ;
-}); 
+});
 }
 
 
-// all Tab 눌렀을 때 
+// all Tab 눌렀을 때
 function allTab(){
   todos.forEach(function(todo){
     tapped.innerHTML = '<li id="all" class="active"><a>All</a></li>'
       + '<li id="active" ><a>Active</a></li>'
       + '<li id="completed"><a>Completed</a></li>';
-      list.innerHTML = '';  
+      list.innerHTML = '';
       newRenderHtml();
       console.log(todos);
    });
@@ -39,17 +39,17 @@ function activeTab(){
   list.innerHTML = ''; //todos 안에다가 선언하면 안되는데 돌때마다 초기화를 해버려서 마지막 항목만 뜬다.
   todos.forEach(function(todo){
     var checked = todo.completed ? 'checked' : '';
-    
+
     tapped.innerHTML = '<li id="all"><a>All</a></li>'
       + '<li id="active" class="active"><a>Active</a></li>'
       + '<li id="completed"><a>Completed</a></li>';
-    
-    
+
+
     if(todo.completed !== true) {
       list.innerHTML += '<li class="list-group-item">'
         + '<div class="hover-anchor">'
         + '<a class="hover-action text-muted">'
-        + '<span class="glyphicon glyphicon-remove-circle pull-right" data-id="' 
+        + '<span class="glyphicon glyphicon-remove-circle pull-right" data-id="'
         + todo.id + '"></span></a><label class="i-checks" for="' + todo.id + '">'
         + '<input type="checkbox" id="' + todo.id + '"' + checked + '><i></i>'
         + '<span>' + todo.content + '</span>'
@@ -68,12 +68,12 @@ function completedTab(){
     tapped.innerHTML = '<li id="all"><a>All</a></li>'
       + '<li id="active" ><a>Active</a></li>'
       + '<li id="completed" class="active"><a>Completed</a></li>';
-       
+
      if(todo.completed !== false) {
       list.innerHTML += '<li class="list-group-item">'
         + '<div class="hover-anchor">'
         + '<a class="hover-action text-muted">'
-        + '<span class="glyphicon glyphicon-remove-circle pull-right" data-id="' 
+        + '<span class="glyphicon glyphicon-remove-circle pull-right" data-id="'
         + todo.id + '"></span></a><label class="i-checks" for="' + todo.id + '">'
         + '<input type="checkbox" id="' + todo.id + '"' + checked + '><i></i>'
         + '<span>' + todo.content + '</span>'
@@ -112,7 +112,7 @@ list.addEventListener('change', function(e){
   });
   this.removeChild(e.target.parentNode.parentNode.parentNode);
 }
-  
+
   if (tapCheck.id === 'all') {
     list.innerHTML = '';
     newRenderHtml();
@@ -147,7 +147,7 @@ inputText.addEventListener('keyup' , function (e) {
   list.innerHTML = '<li class="list-group-item">'
       + '<div class="hover-anchor">'
       + '<a class="hover-action text-muted">'
-      + '<span class="glyphicon glyphicon-remove-circle pull-right" data-id="' 
+      + '<span class="glyphicon glyphicon-remove-circle pull-right" data-id="'
       + maxId + '"></span></a><label class="i-checks" for="' + maxId + '">'
       + '<input type="checkbox" id="' + maxId + '"' + false + '><i></i>'
       + '<span>' + inputText.value + '</span>'
@@ -161,7 +161,7 @@ inputText.addEventListener('keyup' , function (e) {
 // 삭제 버튼 클릭 시 해당 항목 삭제
 list.addEventListener('click', function(e){
   if (e.target.nodeName !== 'SPAN' || e.target.outerText !== '') return;
-  
+
   todos = todos.filter(function(todo){
     return todo.id !== +e.target.dataset.id;
   });
@@ -169,7 +169,7 @@ list.addEventListener('click', function(e){
   itemCount();
   console.log(todos);
 });
- 
+
 
 // clear completed 버튼 구현
 clearCompleted.addEventListener('click', function(e){
@@ -194,3 +194,4 @@ window.addEventListener('load', function () {
   newRenderHtml();
   itemCount();
  });
+
